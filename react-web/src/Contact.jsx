@@ -13,7 +13,7 @@ const Contact = () => {
         <div className="contact-grid">
           <div className="contact-card">
             <div className="icon">📍</div>
-            <h3>Address:</h3>
+            <h3>Address</h3>
             <p>Emina Redžepagića 47A</p>
             <p>36300 Novi Pazar</p>
           </div>
@@ -26,8 +26,9 @@ const Contact = () => {
 
           <div className="contact-card">
             <div className="icon">✉️</div>
-            <h3>Email:</h3>
+            <h3>Email</h3>
             <p>kadirnuhovic8@gmail.com</p>
+            <p>kadirnuhovic4@gmail.com</p>
           </div>
 
           <div className="contact-card github-card">
