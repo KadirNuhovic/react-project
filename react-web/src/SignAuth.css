@@ -18,6 +18,7 @@ body, html {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  padding: 20px;
 }
 
 .modern-auth-btns {
@@ -98,7 +99,7 @@ body, html {
   border: 1px solid rgba(243, 156, 18, 0.3); /* Dodat border kao sto si trazio */
   max-width: 410px;
   width: 100%;
-  margin: 20px;
+  margin: 0;
   text-align: center;
   position: relative;
   backdrop-filter: blur(5px);
@@ -240,4 +241,123 @@ body, html {
   color: #f39c12;
   background: rgba(243, 156, 18, 0.05);
   transform: translateY(-2px);
+}
+
+/* Clock Styles */
+.clock-container {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  min-width: 180px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.clock-time {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 700;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.clock-city {
+  margin: 5px 0 0;
+  opacity: 0.9;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.clock-date {
+  margin: 0;
+  opacity: 0.6;
+  font-size: 0.8rem;
+}
+
+.auth-wrapper {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* --- GLOBAL RESPONSIVE STYLES --- */
+
+@media (max-width: 900px) {
+  .auth-wrapper {
+    gap: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Layout adjustments */
+  .auth-wrapper {
+    flex-direction: column;
+    padding-top: 20px;
+    padding-bottom: 40px;
+  }
+
+  .modern-center {
+    height: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .clock-container {
+    width: 100%;
+    max-width: 350px;
+    order: -1; /* Sat na vrhu na mobilnom */
+  }
+
+  /* Header Responsive */
+  .header {
+    flex-direction: column;
+    height: auto !important;
+    padding: 15px !important;
+    gap: 15px;
+  }
+
+  .header-left, .header-right {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Footer Responsive */
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+
+  /* Contact & About Grids */
+  .contact-grid, .skills-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .modern-center {
+    padding: 10px;
+  }
+
+  .auth-container {
+    padding: 30px 20px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .auth-container h2 {
+    font-size: 1.8rem;
+  }
+
+  .clock-time {
+    font-size: 2.5rem;
+  }
 }

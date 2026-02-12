@@ -1,5 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './SignAuth.css';
+
+const Clock = () => {
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="clock-container fade-in">
+      <h2 className="clock-time">
+        {time.toLocaleTimeString('sr-RS', { timeZone: 'Europe/Belgrade', hour: '2-digit', minute: '2-digit' })}
+      </h2>
+      <p className="clock-city">Novi Pazar</p>
+      <p className="clock-date">
+        {time.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' })}
+      </p>
+    </div>
+  );
+};
 
 const SignAuth = ({ onSignIn, onSignUp, onGuest }) => {
   const [isLogin, setIsLogin] = useState(true);
@@ -26,7 +47,7 @@ const SignAuth = ({ onSignIn, onSignUp, onGuest }) => {
   };
 
   return (
-    <div className="modern-bg modern-center">
+    <div className="modern-bg modern-center auth-wrapper">
       <div className="auth-container">
         
         {/* Dugmad za izbor (Toggle) */}
@@ -67,6 +88,7 @@ const SignAuth = ({ onSignIn, onSignUp, onGuest }) => {
           </div>
         </div>
       </div>
+      <Clock />
     </div>
   );
 };
