@@ -288,6 +288,16 @@ body, html {
 
 /* --- GLOBAL RESPONSIVE STYLES --- */
 
+/* Safe Area for iPhone 14/15 Pro (Notch/Dynamic Island support) */
+@supports (padding: env(safe-area-inset-top)) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
 @media (max-width: 900px) {
   .auth-wrapper {
     gap: 30px;
@@ -313,32 +323,74 @@ body, html {
     width: 100%;
     max-width: 350px;
     order: -1; /* Sat na vrhu na mobilnom */
+    margin-bottom: 20px;
   }
 
   /* Header Responsive */
   .header {
     flex-direction: column;
     height: auto !important;
-    padding: 15px !important;
-    gap: 15px;
+    padding: 20px 15px !important;
+    gap: 20px;
   }
 
-  .header-left, .header-right {
+  .header-left {
     width: 100%;
+    display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .header-center {
+    width: 100%;
+    margin: 5px 0;
+  }
+  
+  .search-bar {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .header-right {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
   }
 
   /* Footer Responsive */
   .footer-content {
     flex-direction: column;
     text-align: center;
-    gap: 30px;
+    gap: 40px;
+  }
+  
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    gap: 10px;
   }
 
   /* Contact & About Grids */
   .contact-grid, .skills-grid {
     grid-template-columns: 1fr !important;
+  }
+  
+  .about-container, .contact-container {
+    padding: 20px 15px !important;
+  }
+  
+  .modern-content {
+    margin-top: 20px;
+    padding: 30px 20px;
+    width: 100%;
+    box-sizing: border-box;
   }
 }
 
@@ -351,6 +403,7 @@ body, html {
     padding: 30px 20px;
     width: 100%;
     max-width: 100%;
+    box-sizing: border-box;
   }
 
   .auth-container h2 {
@@ -359,5 +412,26 @@ body, html {
 
   .clock-time {
     font-size: 2.5rem;
+  }
+  
+  /* Navigation Links Styling for Mobile */
+  .nav-link {
+    font-size: 14px;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+    margin: 2px;
+  }
+  
+  /* Typography adjustments for iPhone 14/15 Pro readability */
+  h1 { font-size: 1.8rem !important; }
+  h2 { font-size: 1.5rem !important; }
+  p { font-size: 1rem !important; }
+  
+  .job-title { font-size: 1.2rem !important; }
+  
+  /* Buttons touch target size */
+  button, .toggle-btn, .auth-btn {
+    min-height: 44px; /* Apple Human Interface Guidelines */
   }
 }
