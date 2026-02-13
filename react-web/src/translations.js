@@ -41,6 +41,11 @@ export const translations = {
     followUs: "Follow Us",
     rightsReserved: "All rights reserved.",
     hi: "Hi",
+    mySkills: "My Skills",
+    experience: "Experience",
+    freelanceDev: "Freelance Web Developer",
+    freelanceDesc: "Working on various projects for clients worldwide.",
+    downloadCV: "Download CV",
   },
   sr: {
     home: "Početna",
@@ -84,6 +89,11 @@ export const translations = {
     followUs: "Pratite Nas",
     rightsReserved: "Sva prava zadržana.",
     hi: "Zdravo",
+    mySkills: "Moje Veštine",
+    experience: "Iskustvo",
+    freelanceDev: "Freelance Web Developer",
+    freelanceDesc: "Rad na raznim projektima za klijente širom sveta.",
+    downloadCV: "Preuzmi CV",
   },
   de: {
     home: "Startseite",
@@ -127,5 +137,10 @@ export const translations = {
     followUs: "Folgen Sie uns",
     rightsReserved: "Alle Rechte vorbehalten.",
     hi: "Hallo",
+    mySkills: "Meine Fähigkeiten",
+    experience: "Erfahrung",
+    freelanceDev: "Freiberuflicher Webentwickler",
+    freelanceDesc: "Arbeit an verschiedenen Projekten für Kunden weltweit.",
+    downloadCV: "Lebenslauf herunterladen",
   }
 };

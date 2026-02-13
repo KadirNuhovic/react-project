@@ -60,7 +60,7 @@ const Header = ({ user, onSignOut, onShowSignIn, onShowSignUp, onNavigate, lang,
           <option value="de">🇩🇪 DE</option>
         </select>
         
-        <button className="theme-toggle" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+        <button className={`theme-toggle ${theme}`} onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
 

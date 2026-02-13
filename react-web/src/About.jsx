@@ -1,7 +1,22 @@
 import React from 'react';
 import './About.css';
+import cvFile from './cv.pdf';
 
-const About = () => {
+const About = ({ t }) => {
+  const trans = t || {
+    downloadCV: "Download CV",
+    mySkills: "My Skills"
+  };
+
+  const skills = [
+    { name: "React / Redux", level: 90 },
+    { name: "JavaScript (ES6+)", level: 85 },
+    { name: "HTML5 / CSS3", level: 95 },
+    { name: "Node.js", level: 85 },
+    { name: "UI/UX Design", level: 80 },
+    { name: "Git / GitHub", level: 85 }
+  ];
+
   return (
     <div className="about-section">
       <div className="about-container">
@@ -18,6 +33,9 @@ const About = () => {
             </p>
             <a href="https://github.com/KadirNuhovic" target="_blank" rel="noopener noreferrer" className="github-link-btn">
               Visit my GitHub
+            </a>
+            <a href={cvFile} download="Kadir_Nuhovic_CV.pdf" className="cv-download-btn">
+              {trans.downloadCV}
             </a>
           </div>
           
@@ -86,12 +104,25 @@ const About = () => {
 
           {/* Skills */}
           <div className="cv-section">
-            <h3>Skills</h3>
-            <div className="skills-grid">
-              <span className="skill-tag">CSS (Advanced)</span>
-              <span className="skill-tag">HTML (Advanced)</span>
-              <span className="skill-tag">JavaScript (Advanced)</span>
-              <span className="skill-tag">React (Advanced)</span>
+            <h3>{trans.mySkills || "Skills"}</h3>
+            <div className="skills-container">
+              {skills.map((skill, index) => (
+                <div key={index} className="skill-item">
+                  <div className="skill-info">
+                    <span>{skill.name}</span>
+                    <span>{skill.level}%</span>
+                  </div>
+                  <div className="skill-bar">
+                    <div 
+                      className="skill-progress" 
+                      style={{ 
+                        width: `${skill.level}%`, 
+                        transition: `width 1.5s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.1}s` 
+                      }}
+                    ></div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 

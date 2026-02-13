@@ -79,12 +79,37 @@
   align-items: center;
   margin-bottom: 10px;
   border-left: 4px solid #3498db;
-  transition: transform 0.2s;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+  animation: powerIn linear both;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+}
+
+/* Laser Shine Efekat */
+.admin-post-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.4), transparent); /* Plavi laser za admina */
+  transform: skewX(-25deg);
+  transition: none;
+  pointer-events: none;
 }
 
 .admin-post-item:hover {
-  transform: translateX(5px);
-  background: var(--glass-bg);
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 0 20px rgba(52, 152, 219, 0.4);
+  z-index: 10;
+}
+
+.admin-post-item:hover::after {
+  left: 150%;
+  transition: 0.6s ease-in-out;
 }
 
 .admin-post-info {
@@ -129,4 +154,17 @@
 .admin-delete-btn:hover {
   background: #e74c3c;
   color: white;
+}
+
+@keyframes powerIn {
+  0% {
+    opacity: 0;
+    transform: perspective(1000px) rotateX(30deg) translateY(100px) scale(0.8);
+    filter: blur(20px) brightness(0);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1000px) rotateX(0) translateY(0) scale(1);
+    filter: blur(0) brightness(1);
+  }
 }

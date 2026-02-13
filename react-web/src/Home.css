@@ -6,11 +6,45 @@
   animation: fadeIn 0.8s ease-out;
 }
 
+/* Cyber Grid Background */
+.grid-background {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 0;
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 90%);
+}
+
 /* --- Hero Sekcija --- */
 .hero-section {
   text-align: center;
   margin-bottom: 100px;
   padding: 20px;
+  position: relative; /* Za pozicioniranje lebdećih elemenata */
+}
+
+/* Lebdeći svetleći krugovi u pozadini */
+.hero-section::before, .hero-section::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(180deg, rgba(243, 156, 18, 0.4), rgba(231, 76, 60, 0.4));
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: -1;
+  animation: float-slow 8s ease-in-out infinite alternate;
+}
+
+.hero-section::before { top: -20px; left: 10%; }
+.hero-section::after { 
+  bottom: -20px; right: 10%; 
+  background: linear-gradient(180deg, rgba(52, 152, 219, 0.4), rgba(155, 89, 182, 0.4));
+  animation-delay: -4s;
 }
 
 .hero-title {
@@ -23,10 +57,12 @@
 
 /* Gradijent tekst */
 .highlight {
-  background: linear-gradient(135deg, #f39c12 0%, #d35400 100%);
+  background: linear-gradient(to right, #f39c12 20%, #fff 40%, #f39c12 60%, #d35400 80%);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
+  animation: shine 3s linear infinite; /* Tekst koji sija */
 }
 
 .hero-subtitle {
@@ -59,6 +95,7 @@
   background: linear-gradient(90deg, #f39c12, #e67e22);
   color: white;
   box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+  animation: pulse-glow 2s infinite; /* Dugme pulsira */
 }
 
 .cta-btn.secondary {
@@ -94,10 +131,28 @@
   padding: 40px 30px;
   border-radius: 24px;
   text-align: center;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy efekat */
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  animation: powerIn linear both;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+}
+
+/* Laser Shine Efekat */
+.feature-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(243, 156, 18, 0.4), transparent);
+  transform: skewX(-25deg);
+  transition: none;
+  pointer-events: none;
+  z-index: 2;
 }
 
 /* Glow efekat na hover */
@@ -114,9 +169,15 @@
 }
 
 .feature-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  border-color: rgba(243, 156, 18, 0.3);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 0 30px rgba(243, 156, 18, 0.6), inset 0 0 20px rgba(243, 156, 18, 0.1);
+  border-color: #f39c12;
+  z-index: 10;
+}
+
+.feature-card:hover::after {
+  left: 150%;
+  transition: 0.6s ease-in-out;
 }
 
 .feature-card:hover::before {
@@ -127,7 +188,7 @@
   font-size: 3.5rem;
   margin-bottom: 25px;
   display: inline-block;
-  transition: transform 0.3s ease;
+  transition: transform 0.5s ease;
 }
 
 .feature-card:hover .card-icon {
@@ -151,6 +212,35 @@
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* Nove animacije */
+@keyframes float-slow {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(20px, 40px); }
+}
+
+@keyframes shine {
+  to { background-position: 200% center; }
+}
+
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0.4); }
+  70% { box-shadow: 0 0 0 15px rgba(243, 156, 18, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0); }
+}
+
+@keyframes powerIn {
+  0% {
+    opacity: 0;
+    transform: perspective(1000px) rotateX(30deg) translateY(100px) scale(0.8);
+    filter: blur(20px) brightness(0);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1000px) rotateX(0) translateY(0) scale(1);
+    filter: blur(0) brightness(1);
+  }
 }
 
 /* Responsive */

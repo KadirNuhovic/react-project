@@ -1,7 +1,8 @@
 .contact-section {
   padding: 60px 20px;
-  color: #fff;
+  color: var(--text-color);
   margin-top: 40px;
+  overflow-x: hidden; /* Sprečava horizontalni skrol tokom animacije */
 }
 
 .contact-container {
@@ -21,45 +22,70 @@
 }
 
 .contact-header p {
-  color: #b9bbbe;
+  color: var(--text-secondary);
   font-size: 1.1rem;
 }
 
 .contact-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: 1fr;
+  max-width: 600px;
+  margin: 0 auto;
   gap: 30px;
 }
 
 .contact-card {
-  background: rgba(35, 39, 42, 0.6);
+  background: var(--card-bg);
   padding: 30px;
   border-radius: 16px;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden; /* Bitno za shine efekat */
+}
+
+/* Laser Shine Efekat */
+.contact-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(243, 156, 18, 0.4), transparent);
+  transform: skewX(-25deg);
+  transition: none;
+  pointer-events: none;
 }
 
 .contact-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 0 30px rgba(243, 156, 18, 0.6), inset 0 0 20px rgba(243, 156, 18, 0.1);
   border-color: #f39c12;
+  z-index: 10;
+}
+
+.contact-card:hover::after {
+  left: 150%;
+  transition: 0.6s ease-in-out;
 }
 
 .contact-card .icon {
   font-size: 3rem;
   margin-bottom: 20px;
   display: block;
+  animation: floatIcon 3s ease-in-out infinite;
 }
 
 .contact-card h3 {
   font-size: 1.4rem;
   margin-bottom: 15px;
-  color: #fff;
+  color: var(--text-color);
 }
 
 .contact-card p {
-  color: #b9bbbe;
+  color: var(--text-secondary);
   margin: 5px 0;
   line-height: 1.5;
 }
@@ -80,4 +106,30 @@
 .github-btn:hover {
   background: #f39c12;
   color: #23272a;
+}
+
+/* --- Scroll Animacije --- */
+
+@keyframes powerIn {
+  0% {
+    opacity: 0;
+    transform: perspective(1000px) rotateX(30deg) translateY(100px) scale(0.8);
+    filter: blur(20px) brightness(0);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1000px) rotateX(0) translateY(0) scale(1);
+    filter: blur(0) brightness(1);
+  }
+}
+
+.contact-card {
+  animation: powerIn linear both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 100%;
+}
+
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
 }

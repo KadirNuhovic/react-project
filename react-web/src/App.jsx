@@ -155,7 +155,7 @@ function App() {
       <div className="modern-content">
         {page === 'home' && <Home onNavigate={setPage} t={t} />}
         {page === 'contact' && <Contact />}
-        {page === 'about' && <About />}
+        {page === 'about' && <About t={t} />}
         {page === 'blog' && <Blog t={t} />}
         {page === 'community' && <Community posts={posts} onAddPost={handleAddPost} t={t} />}
         {page === 'admin' && <AdminRoom posts={posts} onAddPost={handleAddPost} onDeletePost={handleDeletePost} t={t} />}

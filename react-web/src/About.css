@@ -26,12 +26,42 @@
   padding: 30px;
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  position: relative;
+  overflow: hidden;
+  animation: powerIn linear both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 100%;
+}
+
+/* Laser Shine Efekat */
+.about-card::after, .cv-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(243, 156, 18, 0.4), transparent);
+  transform: skewX(-25deg);
+  transition: none;
+  pointer-events: none;
+}
+
+.about-card:hover, .cv-section:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 0 30px rgba(243, 156, 18, 0.6), inset 0 0 20px rgba(243, 156, 18, 0.1);
+  border-color: #f39c12;
+  z-index: 10;
 }
 
 .profile-card {
   text-align: center;
   border-top: 3px solid #f39c12;
+}
+
+.about-card:hover::after, .cv-section:hover::after {
+  left: 150%;
+  transition: 0.6s ease-in-out;
 }
 
 .job-title {
@@ -64,6 +94,26 @@
   background-color: #e67e22;
 }
 
+.cv-download-btn {
+  display: inline-block;
+  padding: 10px 25px;
+  background-color: transparent;
+  border: 2px solid #f39c12;
+  color: #f39c12;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: all 0.2s;
+  margin-left: 15px;
+}
+
+.cv-download-btn:hover {
+  background-color: #f39c12;
+  color: #23272a;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(243, 156, 18, 0.4);
+}
+
 .cv-section h3 {
   color: #e0e0e0;
   border-bottom: 1px solid #4f545c;
@@ -73,6 +123,21 @@
 
 .cv-item {
   margin-bottom: 20px;
+  position: relative;
+  padding-left: 25px;
+  border-left: 2px solid rgba(243, 156, 18, 0.3);
+}
+
+.cv-item::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  background: #f39c12;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(243, 156, 18, 0.6);
 }
 
 .cv-date {
@@ -82,29 +147,83 @@
   margin-bottom: 8px;
 }
 
-.skills-grid {
+.skills-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.skill-tag {
-  display: inline-block;
-  background: #2f3136;
-  padding: 8px 15px;
-  border-radius: 20px;
-  border: 1px solid #f39c12;
-  font-size: 0.9rem;
-  color: #fff;
-  transition: background 0.3s;
+.skill-item {
+  width: 100%;
 }
 
-.skill-tag:hover {
-  background: rgba(243, 156, 18, 0.2);
+.skill-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.skill-bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.skill-progress {
+  height: 100%;
+  background: linear-gradient(90deg, #f39c12, #e67e22);
+  border-radius: 4px;
+  position: relative;
+  box-shadow: 0 0 10px rgba(243, 156, 18, 0.5);
+}
+
+/* Shine effect on the bar */
+.skill-progress::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: translateX(-100%);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
+@media (max-width: 600px) {
+  .cv-download-btn {
+    margin-left: 0;
+    margin-top: 15px;
+    display: block;
+    width: fit-content;
+    margin: 15px auto 0;
+  }
 }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes powerIn {
+  0% {
+    opacity: 0;
+    transform: perspective(1000px) rotateX(30deg) translateY(100px) scale(0.8);
+    filter: blur(20px) brightness(0);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1000px) rotateX(0) translateY(0) scale(1);
+    filter: blur(0) brightness(1);
+  }
 }

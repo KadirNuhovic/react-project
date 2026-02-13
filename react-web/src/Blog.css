@@ -37,17 +37,35 @@
   border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 25px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   display: flex;
   flex-direction: column;
   position: relative;
   overflow: hidden;
+  animation: powerIn linear both;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+}
+
+/* Laser Shine Efekat */
+.blog-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(243, 156, 18, 0.4), transparent);
+  transform: skewX(-25deg);
+  transition: none;
+  pointer-events: none;
 }
 
 .blog-card:hover {
-  transform: translateY(-7px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-  border-color: rgba(243, 156, 18, 0.4);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 0 30px rgba(243, 156, 18, 0.6), inset 0 0 20px rgba(243, 156, 18, 0.1);
+  border-color: #f39c12;
+  z-index: 10;
 }
 
 /* Dekorativna linija na vrhu kartice */
@@ -65,6 +83,33 @@
 
 .blog-card:hover::before {
   opacity: 1;
+}
+
+.blog-card:hover::after {
+  left: 150%;
+  transition: 0.6s ease-in-out;
+}
+
+/* Stilovi za sliku */
+.blog-image-wrapper {
+  width: 100%;
+  height: 180px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+}
+
+.blog-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.blog-card:hover .blog-image {
+  transform: scale(1.1); /* Zoom efekat na sliku */
 }
 
 .blog-card-header {
@@ -150,4 +195,67 @@
   .blog-header h1 {
     font-size: 2rem;
   }
+}
+
+@keyframes powerIn {
+  0% {
+    opacity: 0;
+    transform: perspective(1000px) rotateX(30deg) translateY(100px) scale(0.8);
+    filter: blur(20px) brightness(0);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1000px) rotateX(0) translateY(0) scale(1);
+    filter: blur(0) brightness(1);
+  }
+}
+
+/* Modal (Lightbox) styles */
+.blog-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  cursor: zoom-out;
+  animation: modalFadeIn 0.3s ease;
+}
+
+.blog-modal-image {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  cursor: default;
+  animation: zoomIn 0.3s ease;
+}
+
+.blog-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.blog-modal-close:hover {
+  color: #f39c12;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
